@@ -21,6 +21,8 @@ namespace WeatherApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public const string PlaceholderSearch = "Enter zipcode or city, state";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +34,12 @@ namespace WeatherApp
             {
                 return;
             }
+            if (textBoxSearch.Text == PlaceholderSearch)
+            {
+                return;
+            }
             WeatherResult wr = WeatherService.GetWeather(textBoxSearch.Text);
+
             if (wr != null)
             {
                 labelCityNameZip.Content = wr.cityState + " " + wr.zipCode;
@@ -56,14 +63,29 @@ namespace WeatherApp
 
                 labelHumidity.Content = "Humidity: " + wr.humidity;
 
-                labelVisibility.Content = "Visibility: " +  wr.visibility;
+                labelVisibility.Content = "Visibility: " + wr.visibility;
 
                 labelUV.Content = "UV: " + wr.uv;
 
                 labelPrecipitation.Content = "Precipitation: " + wr.precipitation;
             }
-        
 
+
+        }
+
+        private void textBoxSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var tbox = sender as TextBox;
+            tbox.Text = "";
+        }
+
+        private void textBoxSearch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var tbox = sender as TextBox;
+            if (tbox.Text == "")
+            {
+                tbox.Text = PlaceholderSearch;
+            }
         }
     }
 }

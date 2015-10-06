@@ -8,7 +8,7 @@
         Title="Weather App 1.0B" Height="568.518" Width="483.271" Background="AliceBlue">
     <Grid>
         <Border CornerRadius="5" BorderThickness="2" BorderBrush="#FF9DBFE0" Margin="13,11,114,480" Background="White">
-            <TextBox Name="textBoxSearch" Background="Transparent" BorderThickness="0" Margin="-1,-2,-2,-2" FontFamily="Verdana" FontSize="16"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" />
+            <TextBox Name="textBoxSearch" Background="Transparent" BorderThickness="0" Margin="-1,-2,-2,-2" FontFamily="Verdana" FontSize="16"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextAlignment="Center" Text="Enter zipcode or city, state" GotFocus="textBoxSearch_GotFocus" LostFocus="textBoxSearch_LostFocus" Height="47" VerticalAlignment="Top" HorizontalAlignment="Right" Width="347"/>
         </Border>
         <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="366,11,0,0" Height="36" FontFamily="Verdana" FontSize="14" Click="searchButton_Click" RenderTransformOrigin="0.681,0.901" Background="#FF9DBFE0"/>
         <Image x:Name="labelImageCondition" HorizontalAlignment="Left" Height="134" VerticalAlignment="Top" Width="137" Margin="13,52,0,0" Source="Images/Sunny.png" />
