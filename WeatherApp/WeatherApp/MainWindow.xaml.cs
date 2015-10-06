@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,8 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 using WeatherApp.Classes;
+using System.IO;
 
 namespace WeatherApp
 {
@@ -68,8 +70,9 @@ namespace WeatherApp
                 labelUV.Content = "UV: " + wr.uv;
 
                 labelPrecipitation.Content = "Precipitation: " + wr.precipitation;
-            }
 
+                setWeatherImage(wr.iconURL, wr.icon);
+            }
 
         }
 
@@ -86,6 +89,36 @@ namespace WeatherApp
             {
                 tbox.Text = PlaceholderSearch;
             }
+        }
+
+        private void setWeatherImage(string imageURL, string imageFileName)
+        {
+            try
+            {
+                using (WebClient webClient = new WebClient())
+                {
+                    string imageFileDirectory = Path.Combine(Environment.CurrentDirectory, "Images");
+                    if (!Directory.Exists(imageFileDirectory))
+                    {
+                        Directory.CreateDirectory(imageFileDirectory);
+                    }
+
+                    string imageFilePath = imageFileDirectory + "\\" + imageFileName;
+                    if (!File.Exists(imageFilePath))
+                    {
+                        webClient.DownloadFile(imageURL, imageFilePath);
+                    }
+                    
+                    var uriSource = new Uri(imageFilePath);
+                    imageCondition.Source = new BitmapImage(uriSource);
+                }
+            }
+            catch (Exception)
+            {
+                var uriSource = new Uri(@"/WeatherApp;component/Images/Sunny.png", UriKind.Relative);
+                imageCondition.Source = new BitmapImage(uriSource);
+            }
+
         }
     }
 }

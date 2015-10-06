@@ -76,6 +76,10 @@ namespace WeatherApp.Classes
 
                     wResult.precipitation = oCurrentObservation["precip_today_string"].ToString();
 
+                    wResult.iconURL = oCurrentObservation["icon_url"].ToString();
+
+                    wResult.icon = oCurrentObservation["icon"].ToString();
+
                     return wResult;
                 }
             }

@@ -23,6 +23,8 @@ namespace WeatherApp.Classes
         public string visibility { get; set; }
         public string uv { get; set; }
         public string precipitation { get; set; }
+        public string iconURL { get; set; }
+        public string icon { get; set; }
 
     }
 }
